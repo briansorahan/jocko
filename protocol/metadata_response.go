@@ -4,7 +4,7 @@ type Broker struct {
 	NodeID int32
 	Host   string
 	Port   int32
-	// unsupported: Rack *string
+	Rack   *string
 }
 
 type PartitionMetadata struct {
@@ -40,6 +40,10 @@ func (r *MetadataResponse) Encode(e PacketEncoder) (err error) {
 			return err
 		}
 		e.PutInt32(b.Port)
+
+		if err = e.PutNullableString(b.Rack); err != nil {
+			return err
+		}
 	}
 	if r.APIVersion >= 1 {
 		e.PutInt32(r.ControllerID)
@@ -49,9 +53,12 @@ func (r *MetadataResponse) Encode(e PacketEncoder) (err error) {
 	}
 	for _, t := range r.TopicMetadata {
 		e.PutInt16(t.TopicErrorCode)
+
 		if err = e.PutString(t.Topic); err != nil {
 			return err
 		}
+		e.PutBool(t.IsInternal)
+
 		if err = e.PutArrayLength(len(t.PartitionMetadata)); err != nil {
 			return err
 		}
