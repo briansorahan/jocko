@@ -18,6 +18,7 @@ type PartitionMetadata struct {
 type TopicMetadata struct {
 	TopicErrorCode    int16
 	Topic             string
+	IsInternal        bool
 	PartitionMetadata []*PartitionMetadata
 }
 
