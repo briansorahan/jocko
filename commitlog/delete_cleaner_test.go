@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/require"
-	"github.com/travisjeffery/jocko/commitlog"
-	"github.com/travisjeffery/jocko/protocol"
+	"github.com/briansorahan/jocko/commitlog"
+	"github.com/briansorahan/jocko/protocol"
 )
 
 func TestDeleteCleaner(t *testing.T) {
