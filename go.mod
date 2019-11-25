@@ -1,5 +1,7 @@
 module github.com/briansorahan/jocko
 
+go 1.12
+
 require (
 	github.com/Shopify/sarama v1.13.0
 	github.com/apache/thrift v0.0.0-20161221203622-b2a4d4ae21c7
